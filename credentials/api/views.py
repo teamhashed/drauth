@@ -9,3 +9,4 @@ def get_tokens_for_user(request):
         'refresh_token': str(refresh),
         'access_token': str(refresh.access_token),
     })
+    

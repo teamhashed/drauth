@@ -157,7 +157,11 @@ SESSION_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SAMESITE = 'None'
 
 # REST Settings
-REST_FRAMEWORK = {}
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
 
 # Drf-spectacular
 REST_FRAMEWORK.update({'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'})
@@ -196,7 +200,7 @@ REST_USE_JWT = True
 # JWT_AUTH_COOKIE = 'access_token'
 JWT_AUTH_REFRESH_COOKIE = 'refresh_token'
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=90),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
@@ -211,5 +215,10 @@ REST_FRAMEWORK.update({
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     )
 })
+REST_AUTH_SERIALIZERS = {
+    #'LOGIN_SERIALIZER': 'path.to.custom.LoginSerializer',
+    # 'TOKEN_SERIALIZER': 'path.to.custom.TokenSerializer',
+    'USER_DETAILS_SERIALIZER': 'credentials.api.serializers.CustomUserDetailSerializer'
+}
 JWT_AUTH_SECURE = True
 JWT_AUTH_SAMESITE = 'None'
