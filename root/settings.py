@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-from tkinter.tix import Tree
 from corsheaders.defaults import default_headers
 from datetime import timedelta
 import environ
