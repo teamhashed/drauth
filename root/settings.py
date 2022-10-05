@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from tkinter.tix import Tree
 from corsheaders.defaults import default_headers
 from datetime import timedelta
 import environ
@@ -151,8 +152,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Default Django Settings
 SITE_ID = 1
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SAMESITE = 'None'
 
@@ -220,5 +221,5 @@ REST_AUTH_SERIALIZERS = {
     # 'TOKEN_SERIALIZER': 'path.to.custom.TokenSerializer',
     'USER_DETAILS_SERIALIZER': 'credentials.api.serializers.CustomUserDetailSerializer'
 }
-JWT_AUTH_SECURE = False
+JWT_AUTH_SECURE = True
 JWT_AUTH_SAMESITE = 'None'
