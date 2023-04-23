@@ -1,21 +1,49 @@
-# drauth
-Django rest framework authentication template.
+# DRAUTH
 
+DrAuth is a Django application template that provides a complete authentication 
+system out of the box. With DrAuth, you can quickly and easily add user 
+registration, login, logout, password reset, and email verification functionality
+to your Django projects.
 
-## Dependencies
+DrAuth is built using modern Django best practices, 
+including class-based views, forms, and templates. 
+It also includes custom user models and email templates that are designed 
+to be easily customized to fit your specific needs.
+
+* User registration with email verification
+* Login and logout functionality
+* Password reset functionality
+* Custom user model with email as the username field
+* Easy integration with existing Django projects
+
+* With DrAuth, you can save time and effort by not having to build an 
+authentication system from scratch. Instead, you can focus on building the
+unique features of your application while relying on a secure and reliable 
+authentication system.
+
+DrAuth is open source and free to use, so feel free to download it and use it in your projects. If you encounter any issues or have any suggestions for improvement, please open an issue or submit a pull request on GitHub.
+
+### SETUP
+__Installing Dependencies:__
 
 ```bash
-pip install django djangorestframework django-cors-headers djangorestframework-simplejwt dj-rest-auth[with_social] drf-spectacular
+pip install -r requirements.txt
 ```
 
-## Create api/ package in apps
-create `api` directory inside the app and create all those files.
+__Adding your own apps:__
+
+create your own apps via `python manage.py startapp 'app_name'` and 
+make `api/` directory inside the app directory `app_name/api/`
+and create all those files. _Do it easily by the command below:_
 
 ```bash
 touch __init__.py urls.py views.py serializers.py
 ```
+_Note: If your app seems complex, then you can create separated 
+directories inside the `api/` folder for `views` and `serializers`_
 
-## Initialize all apps
+### DOCS
+Django Dependency list into the `INSTALLED_APPS` in `settings.py` of your django project.
 ```python
 # 3rd-party apps
 'allauth',
@@ -32,8 +60,12 @@ touch __init__.py urls.py views.py serializers.py
 'core.apps.CoreConfig',
 'credentials.apps.CredentialsConfig'
 ```
+_Here the `core` app is just the base app with nothing there. It's just for you to get started_
 
-## Default django settings
+__Default Django settings:__
+
+These are the recommended settings to run everything correctly. Still, you can slightly change
+few settings. Follow the official [Django docs](https://docs.djangoproject.com/en/dev/ref/settings/#sessions) to modify these settings.
 ```python
 # Default Django Settings
 SITE_ID = 1
@@ -43,13 +75,18 @@ SESSION_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SAMESITE = 'None'
 ```
 
-## REST settings
+__REST Framework settings:__
+
+To update our REST settings easily from anywhere, we make a blank dictionary, 
+and we'll update it later by our needs.
+
 ```python
 # REST Settings
 REST_FRAMEWORK = {}
 ```
-## Spectacular setup
-`settings.py`
+__Spectacular setup:__
+
+In your `settings.py` file, make sure these settings exist for spectacluar package.
 ```python
 # Drf-spectacular
 REST_FRAMEWORK.update({'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'})
@@ -74,7 +111,8 @@ docs = [
 
 ```
 
-## Cors-headers
+__Cors-headers:__
+
 `settings.py`
 ```python
 from corsheaders.defaults import default_headers
@@ -103,7 +141,8 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = list(default_headers) + ['Set-Cookie']
 ```
-## AllAuth
+**AllAuth:**
+
 `settings.py`
 ```python
 # django-allauth
@@ -118,7 +157,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ```
-## SimpleJWT
+**SimpleJWT**
 
 `settings.py`
 
@@ -137,7 +176,8 @@ SIMPLE_JWT = {
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
 }
 ```
-## dj-rest-auth
+**dj-rest-auth:**
+
 `settings.py`
 ```python
 # dj-rest-auth
@@ -157,13 +197,13 @@ urlpatterns = [
 ]
 ```
 
-## Migrations
+**Migrations:**
 ```bash
 ./manage.py makemigrations
 ./manage.py migrate
 ```
 
-## Refresh token [GET]
+**Refresh token [GET]**
 
 `credentials/api/views.py`
 ```python
